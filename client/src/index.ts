@@ -1,14 +1,66 @@
 enum Tool {
-  None = 1,
-  Pen,
+  Pen = 1,
   Rubber,
 }
 
 class ControlPanel {
   private _tool: Tool;
+  private _buttonPen: HTMLButtonElement;
+  private _buttonRubber: HTMLButtonElement;
+
+  private _penHandler: () => void;
+  private _rubberHandler: () => void;
 
   constructor() {
-    this._tool = Tool.None;
+    this._tool = Tool.Pen;
+    this._buttonPen = document.getElementById("buttonPen") as HTMLButtonElement;
+    this._buttonRubber = document.getElementById("buttonRubber") as HTMLButtonElement;
+
+    this._buttonPen.addEventListener("click", this.__penHandler.bind(this));
+    this._buttonRubber.addEventListener("click", this.__rubberHandler.bind(this));
+  }
+
+  public start() {
+    console.log("Control Panel Loaded");
+  }
+
+  public getCurrentState() : Tool {
+    return this._tool;
+  }
+
+  public registerPenHandler(handler: () => void) {
+    this._penHandler = handler;
+  }
+
+  public registerRubberHandler(handler: () => void) {
+    this._rubberHandler = handler;
+  }
+
+  private _changeUiStyle(tool: Tool) {
+    switch (tool) {
+      case Tool.Pen: {
+        this._buttonPen.className = "btn btn-primary";
+        this._buttonRubber.className = "btn btn-secondary";
+        break;
+      }
+      case Tool.Rubber: {
+        this._buttonPen.className = "btn btn-secondary";
+        this._buttonRubber.className = "btn btn-primary";
+        break;
+      }
+    }
+  }
+
+  private __penHandler(e: MouseEvent) {
+    this._tool = Tool.Pen;
+    this._changeUiStyle(Tool.Pen);
+    this._penHandler();
+  }
+
+  private __rubberHandler(e: MouseEvent) {
+    this._tool = Tool.Rubber;
+    this._changeUiStyle(Tool.Rubber);
+    this._rubberHandler();
   }
 }
 
@@ -28,12 +80,12 @@ class Board {
     this._canvasX = [];
     this._canvasY = [];
 
-    this._setupDrawingBoard(this._canvas2d);
     this._setupEventHandler(this._canvas);
   }
 
   public start() {
     console.log("Canvas Board Loaded");
+    this.setupPen();
     requestAnimationFrame(this.render.bind(this));
   }
 
@@ -60,11 +112,22 @@ class Board {
     requestAnimationFrame(this.render.bind(this));
   }
 
-  private _setupDrawingBoard(ctx2d: CanvasRenderingContext2D) {
-    ctx2d.lineCap = "round";
-    ctx2d.lineJoin = "round";
-    ctx2d.strokeStyle = "black";
-    ctx2d.lineWidth = 1;
+  public setupPen() {
+    this._canvas2d.lineCap = "round";
+    this._canvas2d.lineJoin = "round";
+    this._canvas2d.strokeStyle = "black";
+    this._canvas2d.lineWidth = 2;
+    this._canvasX = [];
+    this._canvasY = [];
+  }
+
+  public setupRubber() {
+    this._canvas2d.lineCap = "round";
+    this._canvas2d.lineJoin = "round";
+    this._canvas2d.strokeStyle = "white";
+    this._canvas2d.lineWidth = 10;
+    this._canvasX = [];
+    this._canvasY = [];
   }
 
   private _setupEventHandler(ctx: HTMLCanvasElement) {
@@ -116,8 +179,13 @@ class Board {
 
 
 function main() {
-  let b = new Board();
-  b.start();
+  let canvasBoard = new Board();
+  canvasBoard.start();
+
+  let controlPanel = new ControlPanel();
+  controlPanel.start();
+  controlPanel.registerPenHandler(canvasBoard.setupPen.bind(canvasBoard));
+  controlPanel.registerRubberHandler(canvasBoard.setupRubber.bind(canvasBoard));
 }
 
 main();
