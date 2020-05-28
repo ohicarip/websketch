@@ -8,12 +8,19 @@
   <meta name="author" content="Yichen Peng">
   <meta name="description" content="A site for web sketch project">
 
-  <link rel="stylesheet" href="css/styles.css?v=1.0">
-
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="./index.css">
 </head>
 
 <body>
-  <canvas id="webSketchCanvas" width="512" height="512" style="border: 3px solid black;"></canvas>
+  <div class="container">
+    <div class="alert alert-primary" role="alert">
+      Try out and draw something here!
+    </div>
+    <div class="container-canvas ">
+      <canvas id="webSketchCanvas" width="512" height="512"></canvas>
+    </div>
+  </div>
   <script src="./dist/index.js"></script>
 </body>
 </html>

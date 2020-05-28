@@ -1,3 +1,18 @@
+enum Tool {
+  None = 1,
+  Pen,
+  Rubber,
+}
+
+class ControlPanel {
+  private _tool: Tool;
+
+  constructor() {
+    this._tool = Tool.None;
+  }
+
+}
+
 class Board {
   private _canvas: HTMLCanvasElement;
   private _canvas2d: CanvasRenderingContext2D;
