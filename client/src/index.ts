@@ -10,7 +10,6 @@ class ControlPanel {
   constructor() {
     this._tool = Tool.None;
   }
-
 }
 
 class Board {

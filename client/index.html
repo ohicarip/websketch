@@ -15,12 +15,27 @@
 <body>
   <div class="container">
     <div class="alert alert-primary" role="alert">
-      Try out and draw something here!
+      Try out and draw something here! Source code <a href="https://github.com/ohicarip/websketch" target="_blank">here</a>!
     </div>
-    <div class="container-canvas ">
-      <canvas id="webSketchCanvas" width="512" height="512"></canvas>
+
+    <div class="row button-row">
+      <div class="btn-group" role="group" aria-label="Toolset">
+        <button type="button" class="btn btn-primary">Pen</button>
+        <button type="button" class="btn btn-secondary">Brush</button>
+        <button type="button" class="btn btn-secondary">Rubber</button>
+      </div>
+    </div>
+
+    <canvas class="canvas-preview" id="webSketchCanvas" width="512" height="512"></canvas>
+    <canvas class="canvas-sketch" id="webSketchCanvas" width="512" height="512"></canvas>
+
+    <div class="row button-row">
+      <div class="btn-group" role="group" aria-label="DocumentTool">
+        <button type="button" class="btn btn-warning"><b>Save & Upload</b></button>
+      </div>
     </div>
   </div>
+
   <script src="./dist/index.js"></script>
 </body>
 </html>
