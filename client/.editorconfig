@@ -1,4 +1,4 @@
-[*.js]
+[*.{js,ts,html}]
 indent_size = 2
 tab_width = 2
 indent_style = space

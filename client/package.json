@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc"
   },
-  "author": "",
+  "author": "Yichen Peng, Hanzhang Zeng",
   "license": "ISC",
   "dependencies": {
-    "tsc": "^1.20150623.0"
+    "typescript": "^3.9.3"
   }
 }
