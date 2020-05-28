@@ -85,6 +85,9 @@ class Board {
       const canvasY = e.pageY - this._canvas.offsetTop;
       this._canvasX.push(canvasX);
       this._canvasY.push(canvasY);
+    } else {
+      this._canvasX = [];
+      this._canvasY = [];
     }
   }
 
