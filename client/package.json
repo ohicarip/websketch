@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "start": "start chrome ./index.html"
   },
   "author": "Yichen Peng, Hanzhang Zeng",
   "license": "ISC",
